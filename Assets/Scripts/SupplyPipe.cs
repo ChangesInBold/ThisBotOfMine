@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class SupplyPipe : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject RepairPiecePrefab;
 
-    // Update is called once per frame
-    void Update()
+    public float PieceGenerationRate = 5;
+    public float GenerateThrust = 500;
+    private float timer;
+
+    private void Update()
     {
-        
+        timer += Time.deltaTime;
+        if (timer > PieceGenerationRate)
+        {
+            timer -= PieceGenerationRate;
+            GameObject lNewPiece = Instantiate(RepairPiecePrefab, transform.position - new Vector3(0,7,0), transform.rotation);
+            lNewPiece.GetComponent<Rigidbody>().AddForce(0, -GenerateThrust, 0);
+        }
     }
 }

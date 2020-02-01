@@ -13,15 +13,16 @@ public class RepairPiece : MonoBehaviour
 
     public bool IsHeld = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private float speed;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (IsHeld)
+        {
+            Vector3 direction = FindObjectOfType<Player>().transform.position - transform.position;
+            if (direction.magnitude > 3.6f)
+                GetComponent<Rigidbody>().AddForce(direction);
+            //Debug.LogError(direction.magnitude);
+        }
     }
 }
